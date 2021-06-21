@@ -1,0 +1,13 @@
+name: sat
+description: opensand-sat
+type: gateway
+shared: false
+interfaces:
+ -  name: gateway_public
+    ip-address: 172.20.30.122
+    mgmt: true
+    vim-network-name: externalFLAT
+ -  name: vnf_pemu
+    ip-address: 192.168.18.15
+    mgmt: false
+    vim-network-name: p_emu

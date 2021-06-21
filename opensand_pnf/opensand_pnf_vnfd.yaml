@@ -1,0 +1,63 @@
+vnfd:
+  description: PNF entry for a firewall router
+  df:
+  - id: default-df
+    instantiation-level:
+    - id: default-instantiation-level
+      vdu-level:
+      - number-of-instances: 1
+        vdu-id: Opensand-sat-VM
+    vdu-profile:
+    - id: Opensand-sat-VM
+      min-number-of-instances: 1
+    lcm-operations-configuration:
+      operate-vnf-op-config:
+        day1-2:
+        - config-access:
+            ssh-access:
+              default-user: ubuntu
+              required: true
+          config-primitive:
+          - name: touch
+            execution-environment-ref: simple-ee
+            parameter:
+            - data-type: STRING
+              default-value: /home/ubuntu/touched
+              name: filename
+          id: Opensand-sat-VM
+          execution-environment-list:
+          - id: simple-ee
+            juju:
+              charm: simple
+              proxy: false
+          initial-config-primitive:
+          - name: touch
+            execution-environment-ref: simple-ee
+            parameter:
+            - data-type: STRING
+              name: filename
+              value: /home/ubuntu/first-touch
+            seq: 1
+  ext-cpd:
+  - id: gateway_public
+    int-cpd:
+      cpd: gateway_public
+      vdu-id: Opensand-sat-VM
+  - id: vnf_pemu
+    int-cpd:
+      cpd: vnf_pemu
+      vdu-id: Opensand-sat-VM
+  id: opensand_pnf_v2
+  mgmt-cp: gateway_public
+  product-name: opensand_pnf_v2
+  vdu:
+  - id: Opensand-sat-VM
+    pdu-type: gateway
+    int-cpd:
+    - id: gateway_public
+      virtual-network-interface-requirement:
+      - name: gateway_public
+    - id: vnf_pemu
+      virtual-network-interface-requirement:
+      - name: vnf_pemu
+    name: Opensand-sat-VM

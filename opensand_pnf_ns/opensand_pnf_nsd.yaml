@@ -1,0 +1,29 @@
+nsd:
+  nsd:
+  - description: PNF OpenSand
+    designer: ETSI OSM
+    df:
+    - id: default-df
+      vnf-profile:
+      - id: Opensand-PNF
+        virtual-link-connectivity:
+        - constituent-cpd-id:
+          - constituent-base-element-id: Opensand-PNF
+            constituent-cpd-id: gateway_public
+          virtual-link-profile-id: mgmt
+        - constituent-cpd-id:
+          - constituent-base-element-id: Opensand-PNF
+            constituent-cpd-id: vnf_pemu
+          virtual-link-profile-id: private
+        vnfd-id: opensand_pnf_v2
+    id: opensand_pnf_ns_v2
+    name: opensand_pnf_ns_v2
+    version: '1.0'
+    virtual-link-desc:
+    - id: mgmt
+      mgmt-network: true
+      vim-network-name: externalFLAT
+    - id: private
+      vim-network-name: p_emu
+    vnfd-id:
+    - opensand_pnf_v2
